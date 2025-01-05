@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Brucoli</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <link rel="stylesheet" href="./Style/SBACSS.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="Script/mapLogic.js"></script>
+    <!-- Inclusione dei file dei percorsi -->
+    <script src="Dataset/Percorsi/BrucoliOrabona.js"></script>
+    <script src="Dataset/Percorsi/BrucoliReDavid.js"></script>
+</head>
+<body>
+<h1>Mappa Brucoli</h1>
+<div id="map-container">
+    <div id="mapBrucoli" style="height: 500px;"></div>
+    <div id="map-menu" class="map-menu">
+        <div class="menu-header">
+            <span id="menu-title"></span>
+            <button id="close-menu" class="close-button">&times;</button>
+        </div>
+        <div class="menu-content">
+            <h4>Sede</h4>
+            <p id="sede-content"></p>
+            <h4>Edificio</h4>
+            <p id="edificio-content"></p>
+            <h4>Piano</h4>
+            <p id="piano-content"></p>
+            <h4>Capacità</h4>
+            <p id="capacita-content"></p>
+            <div class="route-content">
+                <h4>Come raggiungerci</h4>
+                <label>Seleziona un ingresso:</label>
+                <label for="percorso-selector"></label><select id="percorso-selector">
+                    <option value="OR">Via Orabona</option>
+                    <option value="RD">Via Re David</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <button id="open-menu-icon" class="open-menu-icon">&#9776;</button>
+</div>
+
+<script>
+
+    initializeMap(
+        'mapBrucoli',
+        [  41.108965047356975, 16.879038493226602],
+        17,
+        'Brucoli',
+        `Campus “Ernesto Quagliariello”<br> Via E. Orabona, 4 - 70125 Bari`,
+        'Corpo Biblioteca Centrale',
+        'Secondo Piano',
+        'Posti a sedere: 136 <br> Postazioni Internet: 7',
+        BrucoliOrabona,
+        BrucoliReDavid
+    );
+</script>
+</body>
+</html>

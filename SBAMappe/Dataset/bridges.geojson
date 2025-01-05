@@ -1,0 +1,11 @@
+{
+"type": "FeatureCollection",
+"name": "bridges",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "osm_id": 1230851817, "bridge": "yes", "layer": "1", "highway": "footway", "name": null, "oneway": null, "maxspeed": null, "postal_code": null }, "geometry": { "type": "LineString", "coordinates": [ [ 16.8792012, 41.1095511 ], [ 16.8792281, 41.1094979 ] ] } },
+{ "type": "Feature", "properties": { "osm_id": 1230851815, "bridge": "yes", "layer": "1", "highway": "footway", "name": null, "oneway": null, "maxspeed": null, "postal_code": null }, "geometry": { "type": "LineString", "coordinates": [ [ 16.8794462, 41.1095596 ], [ 16.8794205, 41.1096131 ] ] } },
+{ "type": "Feature", "properties": { "osm_id": 30002254, "bridge": "yes", "layer": "1", "highway": "primary", "name": "Ponte Padre Pio", "oneway": "yes", "maxspeed": "30", "postal_code": "70126" }, "geometry": { "type": "LineString", "coordinates": [ [ 16.8853348, 41.1074068 ], [ 16.8894626, 41.1093761 ], [ 16.8898139, 41.1096 ], [ 16.8901671, 41.1098986 ], [ 16.8903033, 41.1099618 ] ] } },
+{ "type": "Feature", "properties": { "osm_id": 30002265, "bridge": "yes", "layer": "1", "highway": "primary", "name": "Ponte Padre Pio", "oneway": "yes", "maxspeed": "30", "postal_code": "70126" }, "geometry": { "type": "LineString", "coordinates": [ [ 16.8902133, 41.1100307 ], [ 16.890109, 41.1099404 ], [ 16.8897442, 41.1096455 ], [ 16.8893985, 41.1094311 ], [ 16.8852878, 41.1074928 ] ] } }
+]
+}
