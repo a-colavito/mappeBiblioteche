@@ -2,12 +2,12 @@ let BrucoliOrabona = {
     "type": "FeatureCollection",
     "features": [ {
         "type": "Feature",
-        "geometry": {"type": "Point", "coordinates": [ 16.880476031669843, 41.10780374567639 ]},
+        "geometry": { "type": "Point", "coordinates": [ 16.880476031669843, 41.10780374567639 ] },
         "id": "7ec85d6a-ecf6-4a70-a153-5ba55e1029fd",
         "properties": {}
     }, {
         "type": "Feature",
-        "geometry": {"type": "Point", "coordinates": [ 16.880476031669843, 41.10780374567639 ]},
+        "geometry": { "type": "Point", "coordinates": [ 16.880476031669843, 41.10780374567639 ] },
         "id": "ef13512e-6e8d-4b4f-abf3-d6387abecfde",
         "properties": {}
     }, {
@@ -20,10 +20,10 @@ let BrucoliOrabona = {
         "properties": {}
     }, {
         "type": "Feature",
-        "geometry": {"type": "Point", "coordinates": [ 16.879038493226602, 41.108965047356975 ]},
+        "geometry": { "type": "Point", "coordinates": [ 16.879038493226602, 41.108965047356975 ] },
         "id": "f72c6e47-646b-474b-81af-22e99d833534",
         "properties": {
-            "name" :"landpoint"
+            "name": "landpoint"
         }
     } ],
     "metadata": {

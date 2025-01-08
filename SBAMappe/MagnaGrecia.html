@@ -1,58 +1,58 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <title>Magne Grecia</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
-  <link rel="stylesheet" href="./Style/SBACSS.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-  <script src="Script/mapLogic.js"></script>
-  <!-- Inclusione dei file dei percorsi -->
-  <script src="Dataset/Percorsi/MagnaGrecia.js"></script>
+    <meta charset="UTF-8">
+    <title>Magne Grecia</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+    <link rel="stylesheet" href="./Style/SBACSS.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="Script/mapLogic.js"></script>
+    <!-- Inclusione dei file dei percorsi -->
+    <script src="Dataset/Percorsi/MagnaGrecia.js"></script>
 </head>
 <body>
 <h1>Mappa Magna Grecia</h1>
 <div id="map-container">
-  <div id="mapMagnaGrecia" style="height: 500px;"></div>
-  <div id="map-menu" class="map-menu">
-    <div class="menu-header">
-      <span id="menu-title"></span>
-      <button id="close-menu" class="close-button">&times;</button>
+    <div id="mapMagnaGrecia" style="height: 500px;"></div>
+    <div id="map-menu" class="map-menu">
+        <div class="menu-header">
+            <span id="menu-title"></span>
+            <button id="close-menu" class="close-button">&times;</button>
+        </div>
+        <div class="menu-content">
+            <h4>Sede</h4>
+            <p id="sede-content"></p>
+            <h4>Edificio</h4>
+            <p id="edificio-content"></p>
+            <h4>Piano</h4>
+            <p id="piano-content"></p>
+            <h4>Capacità</h4>
+            <p id="capacita-content"></p>
+            <div class="route-content">
+                <h4>Come raggiungerci</h4>
+                <label>Seleziona un ingresso:</label>
+                <label for="percorso-selector"></label><select id="percorso-selector">
+                <option value="PercorsoMG">Viale del Turismo</option>
+            </select>
+            </div>
+        </div>
     </div>
-    <div class="menu-content">
-      <h4>Sede</h4>
-      <p id="sede-content"></p>
-      <h4>Edificio</h4>
-      <p id="edificio-content"></p>
-      <h4>Piano</h4>
-      <p id="piano-content"></p>
-      <h4>Capacità</h4>
-      <p id="capacita-content"></p>
-      <div class="route-content">
-        <h4>Come raggiungerci</h4>
-        <label>Seleziona un ingresso:</label>
-        <label for="percorso-selector"></label><select id="percorso-selector">
-          <option value="PercorsoMG">Viale del Turismo</option>
-        </select>
-      </div>
-    </div>
-  </div>
-  <button id="open-menu-icon" class="open-menu-icon">&#9776;</button>
+    <button id="open-menu-icon" class="open-menu-icon">&#9776;</button>
 </div>
 
 <script>
 
-  initializeMap(
-          'mapMagnaGrecia',
-          [40.5264500578582,17.28188786807101],
-          17,
-          'Magna Grecia',
-          `Politecnido Di Bari – Sede Di Taranto <br> Viale del Turismo, 8 - 74123 Taranto `,
-          'Centro Interdipartimentale “Magna Grecia"',
-          'Piano Terra',
-          'Posti a sedere: 70 <br> Postazioni Internet: 2',
-         MagnaGrecia,
-  );
+    initializeMap(
+        'mapMagnaGrecia',
+        [ 40.5264500578582, 17.28188786807101 ],
+        17,
+        'Magna Grecia',
+        `Politecnido Di Bari – Sede Di Taranto <br> Viale del Turismo, 8 - 74123 Taranto `,
+        'Centro Interdipartimentale “Magna Grecia"',
+        'Piano Terra',
+        'Posti a sedere: 70 <br> Postazioni Internet: 2',
+        MagnaGrecia,
+    );
 </script>
 </body>
 </html>
