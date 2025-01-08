@@ -25,7 +25,7 @@ function initializeMap(mapId, centerCoordinates, zoomLevel, mapContext, sede, ed
             opacity: 0.8
         };
     }
-
+//
     // Funzione per aggiungere cerchio al primo punto del percorso
     function addCircleToStartPoint(geoJsonLayer, pathColor) {
         geoJsonLayer.eachLayer(function (layer) {
