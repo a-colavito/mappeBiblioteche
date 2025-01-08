@@ -17,7 +17,7 @@ function initializeMap(mapId, centerCoordinates, zoomLevel, mapContext, sede, ed
         shadowSize: [41, 41]
     });
 
-    // Funzione per settare il colore del percorso
+    // Funzione per determinare il colore del percorso
     function setPathStyle() {
         return {
             color: '#3b8794', // Se la libreria non è trovata, usa il colore del PoliBa
@@ -31,8 +31,8 @@ function initializeMap(mapId, centerCoordinates, zoomLevel, mapContext, sede, ed
         geoJsonLayer.eachLayer(function (layer) {
             if (layer instanceof L.Polyline) {
                 const latlngs = layer.getLatLngs();
-                const startPoint = latlngs[0]; // Start Point del percorso
-                // Qui si aggiunge un cerchio al punto iniziale con lo stesso colore del percorso
+                const startPoint = latlngs[0]; // Ottieni il primo punto
+                // Aggiungi cerchio al punto iniziale con lo stesso colore del percorso
                 L.circleMarker(startPoint, {
                     radius: 5,   // Raggio del cerchio
                     color: pathColor, // Colore del cerchio uguale al percorso
@@ -45,26 +45,27 @@ function initializeMap(mapId, centerCoordinates, zoomLevel, mapContext, sede, ed
     }
 
     // Funzione per aggiungere GeoJSON alla mappa con lo stile
-    const addGeoJsonToMap = (geoJson) => {
-        const pathColor = setPathStyle(); // Ottieni il colore del percorso
+    const addGeoJsonToMap = (geoJson, library) => {
+        const pathColor = setPathStyle().color; // Ottieni il colore del percorso
         const geoJsonLayer = L.geoJSON(geoJson, {
-            style: pathColor,
-            pointToLayer: function () {
-            } //funzione vuota per evitare la sovrapposizione della libreria standard LeafLet
+            style: setPathStyle(),
+            pointToLayer: function (feature, latlng) {
+
+            }
         }).addTo(map);
 
-
+        // Aggiungi cerchio al punto iniziale con il colore del percorso
         addCircleToStartPoint(geoJsonLayer, pathColor);
 
-        return geoJsonLayer;
+        return geoJsonLayer; // Aggiungi questa riga per restituire il layer
     };
 
+    let currentLayer = null;
 
-
-    // Aggiunge un solo marker personalizzato per il centro della mappa con un popup
+    // Aggiungi un solo marker personalizzato per il centro della mappa con un popup
     const centerMarker = L.marker(centerCoordinates, { icon: redIcon }).addTo(map);
 
-    //  toggle del menu
+    // Funzione per gestire il toggle del menu
     function toggleMenu() {
         const menu = document.getElementById('map-menu');
         const openMenuIcon = document.getElementById('open-menu-icon');
@@ -140,12 +141,12 @@ function initializeMap(mapId, centerCoordinates, zoomLevel, mapContext, sede, ed
                 map.removeLayer(currentLayer);
             }
             // Aggiungi il nuovo percorso
-            currentLayer = addGeoJsonToMap(percorsoGeoJson);
+            currentLayer = addGeoJsonToMap(percorsoGeoJson, mapContext.toLowerCase());
         }
     });
 
     if (percorsoOR) {
-        currentLayer = addGeoJsonToMap(percorsoOR);
+        currentLayer = addGeoJsonToMap(percorsoOR, mapContext.toLowerCase());
     }
 
     showMenu();
