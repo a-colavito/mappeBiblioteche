@@ -9,7 +9,7 @@ L'intero progetto è contenuto nella cartella **SBAMappe**, che include i file H
 - **Dataset**
 - **Script**
 - **Style**
-
+c
 ### Cartella **Dataset**
 
 Questa cartella contiene la sottocartella **Percorsi**, che a sua volta include i file JS con le variabili (di nome identico al file) per inizializzare i dati **GeoJSON** relativi ai percorsi. Tutti i dati su punti, poligoni, risorse e percorsi vengono estratti da questi file.
