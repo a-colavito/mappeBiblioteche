@@ -1,4 +1,4 @@
-function initializeMap(mapId, centerCoordinates, zoomLevel, mapContext, sede, edificio, piano, capacità, percorsoOR, percorsoRD) {
+function initializeMap(mapId, centerCoordinates, zoomLevel, mapContext, sede, edificio, piano, capacita, percorsoOR, percorsoRD) {
     const map = L.map(mapId).setView(centerCoordinates, zoomLevel);
 
     // Layer di OpenStreetMap
@@ -8,8 +8,8 @@ function initializeMap(mapId, centerCoordinates, zoomLevel, mapContext, sede, ed
     }).addTo(map);
 
     // Icone personalizzate per le diverse librerie
-    const polilibraryIcon = new L.Icon({
-        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png', // Icona rossa per Polilibrary
+    const redIcon = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
         iconSize: [25, 41],
         iconAnchor: [12, 41],
@@ -17,47 +17,12 @@ function initializeMap(mapId, centerCoordinates, zoomLevel, mapContext, sede, ed
         shadowSize: [41, 41]
     });
 
-    const brucoliIcon = new L.Icon({
-        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png', // Icona blu per Brucoli
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-    });
-
-    const vitruviusIcon = new L.Icon({
-        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png', // Icona nera per Vitruvius
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-    });
-
-    // Funzione per determinare l'icona in base alla libreria
-    function getMarkerIcon(library) {
-        const libraryIcons = {
-            'polilibrary': polilibraryIcon,
-            'brucoli': brucoliIcon,
-            'vitruvius': vitruviusIcon
-        };
-
-        return libraryIcons[library] || polilibraryIcon;  // Default a Polilibrary se non trovato
-    }
-
-    // Funzione per determinare il colore del percorso
-    function getPathStyle(library) {
-        const pathColors = {
-            'polilibrary': '#e23835',   // Percorsi Polilibrary sono rossi
-            'brucoli': '#758998',        // Percorsi Brucoli sono verdi
-            'vitruvius': '#5c88c2'       // Percorsi Vitruvius sono blu
-        };
-
+    // Funzione per settare il colore del percorso
+    function setPathStyle() {
         return {
-            color: pathColors[library] || '#3b8794', // Se la libreria non è trovata, usa il colore del PoliBa
+            color: '#3b8794', // Se la libreria non è trovata, usa il colore del PoliBa
             weight: 3,
-            opacity: 1
+            opacity: 0.8
         };
     }
 
@@ -66,8 +31,8 @@ function initializeMap(mapId, centerCoordinates, zoomLevel, mapContext, sede, ed
         geoJsonLayer.eachLayer(function (layer) {
             if (layer instanceof L.Polyline) {
                 const latlngs = layer.getLatLngs();
-                const startPoint = latlngs[0]; // Ottieni il primo punto
-                // Aggiungi cerchio al punto iniziale con lo stesso colore del percorso
+                const startPoint = latlngs[0]; // Start Point del percorso
+                // Qui si aggiunge un cerchio al punto iniziale con lo stesso colore del percorso
                 L.circleMarker(startPoint, {
                     radius: 5,   // Raggio del cerchio
                     color: pathColor, // Colore del cerchio uguale al percorso
@@ -80,29 +45,26 @@ function initializeMap(mapId, centerCoordinates, zoomLevel, mapContext, sede, ed
     }
 
     // Funzione per aggiungere GeoJSON alla mappa con lo stile
-    const addGeoJsonToMap = (geoJson, library) => {
-        const pathColor = getPathStyle(library).color; // Ottieni il colore del percorso
+    const addGeoJsonToMap = (geoJson) => {
+        const pathColor = setPathStyle(); // Ottieni il colore del percorso
         const geoJsonLayer = L.geoJSON(geoJson, {
-            style: function () {
-                return getPathStyle(library);
-            },
-            pointToLayer: function (feature, latlng) {
-                // Aggiungi marker se necessario (opzionale)
-            }
+            style: pathColor,
+            pointToLayer: function () {
+            } //funzione vuota per evitare la sovrapposizione della libreria standard LeafLet
         }).addTo(map);
 
-        // Aggiungi cerchio al punto iniziale con il colore del percorso
+
         addCircleToStartPoint(geoJsonLayer, pathColor);
 
-        return geoJsonLayer; // Aggiungi questa riga per restituire il layer
+        return geoJsonLayer;
     };
 
-    let currentLayer = null;
 
-    // Aggiungi un solo marker personalizzato per il centro della mappa con un popup
-    const centerMarker = L.marker(centerCoordinates, { icon: getMarkerIcon(mapContext.toLowerCase()) }).addTo(map);
 
-    // Funzione per gestire il toggle del menu
+    // Aggiunge un solo marker personalizzato per il centro della mappa con un popup
+    const centerMarker = L.marker(centerCoordinates, { icon: redIcon }).addTo(map);
+
+    //  toggle del menu
     function toggleMenu() {
         const menu = document.getElementById('map-menu');
         const openMenuIcon = document.getElementById('open-menu-icon');
@@ -144,7 +106,7 @@ function initializeMap(mapId, centerCoordinates, zoomLevel, mapContext, sede, ed
         document.getElementById('sede-content').textContent = sede;
         document.getElementById('edificio-content').textContent = edificio;
         document.getElementById('piano-content').textContent = piano;
-        document.getElementById('capacita-content').innerHTML = capacità.replace(/\n/g, '<br>');
+        document.getElementById('capacita-content').innerHTML = capacita.replace(/\n/g, '<br>');
         document.getElementById('sede-content').innerHTML = sede.replace(/\n/g, '<br>');
     };
 
@@ -178,12 +140,12 @@ function initializeMap(mapId, centerCoordinates, zoomLevel, mapContext, sede, ed
                 map.removeLayer(currentLayer);
             }
             // Aggiungi il nuovo percorso
-            currentLayer = addGeoJsonToMap(percorsoGeoJson, mapContext.toLowerCase());
+            currentLayer = addGeoJsonToMap(percorsoGeoJson);
         }
     });
 
     if (percorsoOR) {
-        currentLayer = addGeoJsonToMap(percorsoOR, mapContext.toLowerCase());
+        currentLayer = addGeoJsonToMap(percorsoOR);
     }
 
     showMenu();
