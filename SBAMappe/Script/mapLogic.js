@@ -49,6 +49,7 @@ function initializeMap(mapId, centerCoordinates, zoomLevel, mapContext, sede, ed
         const pathColor = setPathStyle().color; // Ottieni il colore del percorso
         const geoJsonLayer = L.geoJSON(geoJson, {
             style: setPathStyle(),
+            //funzione vuota per evitare che Leaflet usi il suo stile standard
             pointToLayer: function () {
 
             }
