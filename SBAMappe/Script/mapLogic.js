@@ -45,11 +45,11 @@ function initializeMap(mapId, centerCoordinates, zoomLevel, mapContext, sede, ed
     }
 
     // Funzione per aggiungere GeoJSON alla mappa con lo stile
-    const addGeoJsonToMap = (geoJson, library) => {
+    const addGeoJsonToMap = (geoJson) => {
         const pathColor = setPathStyle().color; // Ottieni il colore del percorso
         const geoJsonLayer = L.geoJSON(geoJson, {
             style: setPathStyle(),
-            pointToLayer: function (feature, latlng) {
+            pointToLayer: function () {
 
             }
         }).addTo(map);
@@ -141,12 +141,12 @@ function initializeMap(mapId, centerCoordinates, zoomLevel, mapContext, sede, ed
                 map.removeLayer(currentLayer);
             }
             // Aggiungi il nuovo percorso
-            currentLayer = addGeoJsonToMap(percorsoGeoJson, mapContext.toLowerCase());
+            currentLayer = addGeoJsonToMap(percorsoGeoJson);
         }
     });
 
     if (percorsoOR) {
-        currentLayer = addGeoJsonToMap(percorsoOR, mapContext.toLowerCase());
+        currentLayer = addGeoJsonToMap(percorsoOR);
     }
 
     showMenu();
